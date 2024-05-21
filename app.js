@@ -1,25 +1,30 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
-import path,{dirname} from 'path'
+import path, { dirname } from 'path'
 import { fileURLToPath } from 'url';
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 import routes from './routes/index.js'
 
 const app = express();
 
-app.use(cors({origin:true}))
+app.use(cors({ origin: true }))
 app.use(express.json());
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-app.use('/uploads',express.static(path.join(__dirname,'uploads')))
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
-app.use("/api",routes)
+app.use("/api", routes)
 
-mongoose.connect(`mongodb+srv://sachin:santacruz@cluster0.74thgvu.mongodb.net/3dimension?retryWrites=true&w=majority`).then(()=>{
-    app.listen(5000,()=>{
-        console.log('server listening on port 5000')
+mongoose.connect(process.env.MONGO_URL).then(() => {
+    app.listen(process.env.port || 5000, () => {
+        console.log(`DB connected and server started on port ${process.env.PORT}`)
     })
+}).catch((err) => {
+    console.log("failed to connect DB")
 })

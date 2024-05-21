@@ -4,7 +4,7 @@ import { upload } from '../middleware/fileUpload.js';
 
 const router=Router()
 
-router.get("/getModels",getModels)
-router.post("/postModel",upload.single('model'),postModel)
+router.get("/get-models",getModels)
+router.post("/upload-model",upload.fields([{name:'model'},{name:"thumbnail"}]),postModel)
 
 export default router;
