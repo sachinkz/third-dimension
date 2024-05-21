@@ -16,8 +16,8 @@ const storage = multer.diskStorage({
 export const upload = multer({
     storage: storage,
     fileFilter: (req, file, cb) => {
-        console.log(file)
         const isValid = MIME_TYPE_MAP.includes(file.mimetype)
+        console.log(isValid)
         let error = isValid ? null : new Error("invalid file type");
         cb(error, isValid);
     }
