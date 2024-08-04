@@ -5,6 +5,7 @@ import path, { dirname } from 'path'
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv'
 import admin from 'firebase-admin';
+import serviceAccount from './fir-88126-firebase-adminsdk-regvs-0ac8aff740.json' assert { type: 'json' };
 
 dotenv.config()
 
@@ -16,7 +17,7 @@ app.use(cors({ origin: true }))
 app.use(express.json());
 
 admin.initializeApp({
-    credential: admin.credential.cert(require(path.resolve(__dirname, 'fir-88126-firebase-adminsdk-regvs-0ac8aff740.json'))),
+    credential: admin.credential.cert(serviceAccount),
     storageBucket: 'fir-88126',
 });
 
