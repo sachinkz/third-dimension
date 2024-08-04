@@ -14,8 +14,17 @@ const app = express();
 app.use(cors({ origin: true }))
 app.use(express.json());
 
+admin.initializeApp({
+    credential: admin.credential.cert(require(path.resolve(__dirname, 'fir-88126-firebase-adminsdk-regvs-0ac8aff740.json'))),
+    storageBucket: 'fir-88126',
+});
+
+export const bucket = admin.storage().bucket();
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
