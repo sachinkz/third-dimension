@@ -4,8 +4,6 @@ import cors from 'cors';
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv'
-import admin from 'firebase-admin';
-import serviceAccount from './fir-88126-firebase-adminsdk-regvs-0ac8aff740.json' assert { type: 'json' };
 
 dotenv.config()
 
@@ -16,17 +14,8 @@ const app = express();
 app.use(cors({ origin: true }))
 app.use(express.json());
 
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    storageBucket: 'fir-88126',
-});
-
-export const bucket = admin.storage().bucket();
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-
-
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
