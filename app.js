@@ -4,6 +4,7 @@ import cors from 'cors';
 import path, { dirname } from 'path'
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv'
+import admin from 'firebase-admin';
 
 dotenv.config()
 
